@@ -9,3 +9,9 @@ This repository is configured for GitHub Pages. Open the Pages URL after deploym
 ## Privacy note
 
 The published demo uses placeholder employee information (`employee@example.com`) rather than a personal email address.
+
+
+## Guides
+
+- [TMB Accounts Guide](accounts.html)
+- [TMB Payroll Management Guide](index.html)
