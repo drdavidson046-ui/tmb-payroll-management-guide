@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Payroll Management လမ်းညွန်အစီအစဉ်</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Noto+Sans+Myanmar:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--pg:#e6ecf5;--pg2:#d5deec;--tx:#10243f;--mu:#5b6b82;--card:#ffffff;--ln:#cfd9e8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--pg:#070c16;--pg2:#0b1324;--tx:#e6edf7;--mu:#8fa1ba;--card:#101a2e;--ln:#22314d}}
+:root[data-theme="dark"]{--pg:#070c16;--pg2:#0b1324;--tx:#e6edf7;--mu:#8fa1ba;--card:#101a2e;--ln:#22314d}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(1200px 700px at 50% 0%,var(--pg2),var(--pg));color:var(--tx);font-family:"Figtree","Noto Sans Myanmar","Padauk",system-ui,sans-serif;display:flex;align-items:center;justify-content:center;gap:44px;padding:16px;overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer}
+.my{font-family:"Noto Sans Myanmar","Padauk","Figtree",system-ui,sans-serif}
+
+/* ───────── Phone shell ───────── */
+.phone{--bg:#0a1120;--cd:#1a2845;--cd2:#141f38;--ln:#263759;--t:#eef2fa;--m:#9db0cb;--gr:#17803f;--gt:#2fc27b;--rd:#e0524f;--amb:#ffb020;
+ position:relative;width:404px;height:min(852px,calc(100dvh - 32px));min-height:600px;background:var(--bg);color:var(--t);border-radius:46px;border:10px solid #04070d;
+ box-shadow:0 0 0 2px #1a2233,0 40px 80px -24px rgba(0,0,0,.65);overflow:hidden;display:flex;flex-direction:column;font-size:15px;line-height:1.35;flex:none;isolation:isolate}
+.phone.ios{--bg:#08142a}
+.sb{position:relative;flex:none;display:flex;align-items:center;justify-content:space-between;height:40px;padding:6px 22px 0;font-weight:600;font-size:14px;z-index:3;background:var(--bg)}
+.phone.ios .sb{height:50px;padding-top:12px}
+.isl{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:106px;height:30px;border-radius:20px;background:#000}
+.ri{display:flex;align-items:center;gap:6px}.sg{display:inline-flex;align-items:flex-end;gap:1px}.sg sup{font-size:7px;font-weight:700;line-height:1;margin-right:1px;position:relative;top:-6px}
+.bat{background:#e9edf4;color:#0a1120;border-radius:6px;padding:0 5px;font-size:11px;font-weight:800;line-height:15px;height:15px;min-width:22px;text-align:center}
+#scr{flex:1;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:none;overscroll-behavior:contain}
+#scr::-webkit-scrollbar{display:none}
+#scr.fade>*{animation:fi .28s ease-out}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}}
+.pad{padding:14px 16px 24px}
+.ic{display:block;flex:none}
+.sub{color:var(--m);font-size:14px}
+.cap{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:#c3cfe3;font-weight:500}
+
+/* bottom bars */
+#bot{flex:none;position:relative;z-index:3}
+.andnav{height:46px;background:#e8e9ee;color:#575b66;display:flex;justify-content:space-around;align-items:center}
+.andnav span{width:70px;display:grid;place-items:center}
+.hind{height:22px;background:var(--bg);display:grid;place-items:center}.hind i{width:128px;height:5px;border-radius:9px;background:#d9dfea;opacity:.9}
+.tabbar{display:flex;justify-content:space-around;align-items:flex-end;padding:10px 4px 2px;background:#08142a;border-top:1px solid #16315a}
+.tab{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px;color:#e6ecf6;min-width:66px;padding:2px 4px;border-radius:12px}
+.tab.on{color:var(--gt)}
+.tab.home{margin-top:-30px}.hc{width:58px;height:58px;border-radius:50%;background:#12a05a;border:4px solid #08142a;display:grid;place-items:center;color:#fff;box-shadow:0 6px 18px rgba(18,160,90,.35)}
+
+.tm{display:inline-flex;align-items:center;gap:7px}.tg{width:19px;height:19px;border-radius:6px;background:#2a9fd8;display:grid;place-items:center}
+.tabbar.and{background:#0a1120;border-top:1px solid #1c2a44;padding:8px 2px 4px}.tabbar.and .tab{font-size:13px;letter-spacing:-.1px;color:#e6ecf6;min-width:0;flex:1}.tabbar.and .tab.home{margin-top:-30px}
+.tabbar.and .hc{background:#17803f;border-color:#0a1120;box-shadow:none}.tab.hot{color:#fff;font-weight:700}
+.tab span{white-space:nowrap}
+.hh{display:flex;align-items:center;gap:12px}.hh .t{flex:1;min-width:0}.hh .g{font-size:19px;color:#e9eef8;line-height:1.1}.hh svg,.tip svg,.tb2 svg{flex:none}.hh h1{margin:2px 0 0;white-space:nowrap;font-size:26px;font-weight:600;line-height:1.1}
+.bellb{position:relative;width:48px;height:48px;border-radius:15px;background:#121f38;border:1px solid #2a3c60;display:grid;place-items:center;color:#eef2fa;flex:none}
+.bellb i{position:absolute;top:-9px;right:-10px;background:#e8433f;color:#fff;font-style:normal;font-size:12px;font-weight:700;border-radius:99px;padding:2px 7px;border:2px solid #0a1120}
+.tb2{position:relative;margin-top:18px;border-radius:22px;padding:18px 18px 20px;background:linear-gradient(135deg,#1b3a37,#1d2e4e 70%);border:1px solid #2b4560;overflow:hidden}
+.tb2 .wm{position:absolute;right:-14px;top:-18px;width:130px;height:130px;border-radius:50%;border:1px dashed rgba(255,255,255,.18);display:grid;place-items:center;opacity:.5}
+.tb2 .lb2{font-size:17px;color:#e9eef8;display:flex;justify-content:space-between;align-items:center;position:relative}
+.tb2 .bigv{font-size:30px;font-weight:700;margin:14px 0 20px;letter-spacing:-.3px;line-height:1.1;position:relative;white-space:nowrap}
+.acts{display:grid;grid-template-columns:repeat(3,1fr);row-gap:16px;text-align:center}
+.acts div{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:15.5px;color:#e9eef8}
+.acts .ti{width:47px;height:47px;border-radius:14px;background:rgba(255,255,255,.15);display:grid;place-items:center;color:#f1f5fb}
+.tb2 hr{border:0;border-top:1px solid rgba(255,255,255,.14);margin:16px 6px}
+.tip{display:flex;gap:12px;align-items:center;margin-top:14px;border:1px solid #14403a;background:#0e2a29;border-radius:16px;padding:14px;font-size:17px;line-height:1.3;color:#eef2fa}
+.tip b{color:#2fc27b;font-weight:500}
+/* top bar of sub-pages */
+.top{position:sticky;top:0;z-index:2;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:14px 18px;border-bottom:1px solid #1b2a47;background:var(--bg);font-weight:600;font-size:18px}
+.top .tl{justify-self:start;font-weight:400;color:#dfe6f3}.top .tl.g{color:#2a9a5a}
+.top .tr{justify-self:end;font-weight:600;color:#4b5b78;padding:2px 6px;border-radius:8px}.top .tr.on{color:var(--gt)}
+.phead{display:flex;align-items:center;gap:14px;padding:6px 18px 6px}
+.phead .bk{color:#2a9a5a}.phead h2{margin:0;font-size:27px;font-weight:600;line-height:1.1}.phead .sub{font-size:16px;color:#cdd7e8}
+.pbtn{margin-left:auto;width:38px;height:38px;border-radius:50%;background:#16784a;display:grid;place-items:center;color:#e9fff3}
+
+/* generic fields */
+.lbl{font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:#e9eef8;margin:20px 0 6px}
+.lbl.s{font-size:12.5px;margin:14px 0 6px;letter-spacing:.06em}
+.lbl.red{color:#e0524f}.lbl.grn{color:#2fc27b}
+.hint{color:#c9d3e6;font-size:15px;margin:0 0 12px;line-height:1.4}
+.fld{background:#1c2b48;border:1px solid rgba(255,255,255,.045);border-radius:12px;padding:0 16px;height:54px;display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:17px;margin-bottom:2px}
+.fld.ph{color:#b9c6dd}.fld.sel .ell{max-width:96px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fld .cur-t{color:#d6e0f1;font-size:15px;margin-right:10px}.fld .v{font-weight:600;font-size:19px;margin-right:auto}
+.money{justify-content:flex-start}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sec{font-size:14px;letter-spacing:.08em;font-weight:600;text-transform:uppercase;margin:24px 0 0;color:#f1f5fc}
+.card{background:var(--cd);border:1px solid #2a3c60;border-radius:18px;padding:16px}
+.card.row{display:flex;align-items:center;gap:14px;margin-bottom:14px;padding:15px 16px}
+.card.row .mid{flex:1;min-width:0}.card.row>.ic:last-child{color:#cfd9ea}
+.big2{font-size:20px;font-weight:600;line-height:1.2;margin:3px 0 2px}
+.ico{width:44px;height:44px;border-radius:50%;background:#12302f;color:#1f8a58;display:grid;place-items:center;flex:none}
+.ico2{width:30px;height:30px;color:#fff;display:grid;place-items:center;flex:none}
+.bal{display:flex;justify-content:space-between;gap:10px;margin:8px 0 14px;padding:18px 16px}
+.bal .l{max-width:150px}.bal .amt{font-size:25px;font-weight:600;line-height:1.25;margin:5px 0 6px}
+.bal .rt{text-align:right;padding-top:46px}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:99px;background:#10343a;color:#2fb872;font-size:13px;padding:6px 12px;white-space:nowrap}
+.pr{margin-top:8px;font-size:12px;color:#2fc27b}
+.eh{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px}.eh b{font-size:20px;font-weight:600}.eh .add{color:var(--gt);font-weight:600;font-size:17px;padding:2px 6px;border-radius:8px}
+.ecard{background:var(--cd);border:1px solid #2a3c60;border-radius:18px;margin-bottom:12px;overflow:visible}
+.erow{display:flex;align-items:center;gap:10px;padding:16px 14px 14px}
+.av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:17px;flex:none;background:#12302f;color:#2fc27b}
+.av.x{background:#3a1b24;color:#e0524f}.av.g{background:#10241f;color:#1f9d62;font-size:15px;opacity:.9}
+.emid{flex:1;min-width:0}.nm{display:flex;align-items:center;gap:6px;min-width:0}.nm b{font-size:18px;font-weight:600;flex:none;max-width:100%;white-space:nowrap}.nm .tag{flex:0 1 auto;overflow:hidden;text-overflow:ellipsis}
+.tag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:99px;background:#0f3a33;color:#2fc27b;white-space:nowrap}.tag.x{background:#4a1f26;color:#e0524f}
+.em{color:#d3dcec;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.eam{text-align:right;display:flex;flex-direction:column;align-items:flex-end;flex:none;max-width:52%}.eam b{font-size:17px;font-weight:600;white-space:nowrap}.eam small{font-size:12px;color:#c3cfe3;white-space:nowrap;margin-top:2px}
+.edit{display:flex;align-items:center;justify-content:center;gap:8px;padding:13px;border-top:1px solid #2a3c60;font-size:16.5px;border-radius:0 0 18px 18px}
+
+/* business (iOS) */
+.biz .pad{padding:8px 16px 18px}
+.bh{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.bh h1{margin:0;font-size:32px;font-weight:700;line-height:1.1}.bh .sub{font-size:20px;line-height:1.2;margin-top:6px;color:#b5c3dc;max-width:200px}
+.sel2{display:flex;align-items:center;gap:8px;border:1px solid #1f4a85;background:rgba(22,52,96,.55);border-radius:14px;padding:10px 13px;font-size:17px;font-weight:600}
+.act{display:inline-flex;align-items:center;gap:9px;border:1px solid #14754b;background:rgba(14,90,60,.38);color:#27d083;border-radius:99px;padding:8px 14px;font-size:16px;font-weight:600;margin:14px 0 14px}
+.bg2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bc{position:relative;text-align:left;background:linear-gradient(160deg,rgba(23,58,108,.62),rgba(13,36,72,.62));border:1px solid #1f4a85;border-radius:22px;padding:16px;min-height:196px;color:#fff}
+.bc .ar{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center}
+.bc .bi{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;margin-bottom:14px}
+.bc b{display:block;font-size:19px;font-weight:600;line-height:1.25}.bc .vm{font-size:17px;color:#b5c3dc;margin-top:6px}.bc .tmc{font-size:22px;font-weight:700;margin-top:6px;line-height:1.25}
+.bl{display:flex;align-items:center;gap:14px;background:linear-gradient(160deg,rgba(23,58,108,.55),rgba(13,36,72,.55));border:1px solid #1f4a85;border-radius:20px;padding:16px;margin-top:14px;text-align:left;width:100%;color:#fff}
+.bl .bi{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;flex:none}.bl .mid{flex:1;min-width:0}.bl b{font-size:19px;font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bl .s{font-size:15.5px;color:#b5c3dc;line-height:1.3}
+.bl .rg{text-align:right;font-weight:700;font-size:18px;white-space:nowrap;flex:none}.bl .rg i{display:block;width:9px;height:9px;border-radius:50%;background:#1ed37b;margin:8px 4px 0 auto}
+
+/* login */
+.lg{text-align:center;padding:18px 20px}.logo{width:104px;height:104px;border-radius:30px;background:#14573a;display:grid;place-items:center;font-size:36px;font-weight:700;margin:26px auto 22px}
+.lg h1{margin:0;font-size:26px}.lg .sub{font-size:17px;margin:8px 0 24px}
+.seg{display:flex;background:var(--cd);border:1px solid var(--ln);border-radius:14px;padding:5px;margin-bottom:16px}.seg span{flex:1;padding:11px;border-radius:10px;color:var(--m)}.seg .on{background:#233352;color:var(--t)}
+.lg .card{text-align:left;padding:18px}.lg .lbl{margin:0 0 8px}
+.btn{display:block;width:100%;border:0;border-radius:14px;background:var(--gr);color:#fff;font-weight:700;padding:15px;font-size:17px;text-align:center}
+.lg .btn{margin-top:14px;position:relative}
+
+/* net pay + schedule + manual */
+.net{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#0b2a29;border:1px solid #15403a;border-radius:14px;padding:16px;margin:16px 0 4px}
+.net .l{color:#2fc27b;font-size:12px;letter-spacing:.07em;text-transform:uppercase;font-weight:600;max-width:150px}.net .l div{text-transform:none;letter-spacing:0;font-size:14px;line-height:1.3;font-weight:400}.net .l .r{color:#e0524f}
+.net .l .g{color:#2fc27b}
+.net b{color:#2fd488;font-size:24px;font-weight:700;white-space:nowrap}
+.ov{color:#1fae6a;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;margin:0 0 6px}
+.chips{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:6px}.chips span{text-align:center;border:1px solid #223455;border-radius:12px;padding:13px 4px;font-size:16.5px;color:#eef2fa;background:rgba(255,255,255,.015)}.chips .on{background:#17803f;border-color:#17803f;color:#fff}
+.opt{background:#1c2b48;border-radius:12px;padding:16px 18px;margin-bottom:10px;font-size:17px}.opt.on{background:#17803f}
+.prev{display:flex;align-items:flex-start;gap:12px;margin-top:20px;background:#0b2724;border:1px solid #11332f;border-radius:14px;padding:16px;color:#2a9a63}.prev b{display:block;font-size:18px;font-weight:500}.prev small{font-size:14px}
+.sc2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.sc2 .c{background:#1a2845;border:1px solid #2a3c60;border-radius:14px;padding:11px 8px;text-align:center}.sc2 .c .cap{font-size:12.5px}.sc2 .c b{font-size:17px;font-weight:600;white-space:nowrap}
+.pms{margin-top:12px;background:#1a2845;border:1px solid #2a3c60;border-radius:14px;padding:12px 14px;display:flex;gap:10px;color:#2a9a63}.pms>div{color:#e9eef8}.pms b{font-size:18px;font-weight:600;display:block}.pms span{font-size:15px;color:#d3dcec;line-height:1.35}
+.selrow{display:flex;justify-content:space-between;align-items:center;margin:16px 0 12px;font-size:17px}.selrow .a{color:#2a9a5a;margin-right:10px}
+.ecard2{border:1px solid #2a3c60;border-radius:16px;padding:14px 16px;margin:6px 0 22px;background:rgba(255,255,255,.012)}
+.er{display:flex;align-items:center;gap:12px}.cb{width:24px;height:24px;border-radius:6px;background:#17803f;display:grid;place-items:center;color:#fff;flex:none}
+.er .av{width:38px;height:38px;font-size:13px;background:#10241f;color:#1f9d62}.er b{font-size:19px;font-weight:600}.er small{display:block;color:#d3dcec;font-size:14.5px}
+.ecard2 .cap{margin-top:16px;font-size:13.5px;letter-spacing:.06em;padding:0 0 0 0;display:block}.ecard2 .am{font-size:21px;font-weight:700;margin:6px 0 4px}.ecard2 .fee{font-size:14.5px;color:#d3dcec}
+.skip{border:1px solid #223455;border-radius:12px;padding:13px 14px;display:flex;justify-content:space-between;color:#9db0cb;margin-top:8px}
+.pay{margin-top:24px;display:flex;align-items:center;justify-content:center;gap:10px;background:#17803f;border-radius:14px;padding:17px;font-size:19px;font-weight:600;color:#fff}
+
+/* ───────── Guide: yellow dot (strictly sequential) ───────── */
+.cur{position:relative;cursor:pointer;outline:2px solid rgba(255,176,32,.6);outline-offset:3px}
+.cur::after{content:"";position:absolute;top:-8px;right:-8px;width:16px;height:16px;border-radius:50%;background:var(--amb,#ffb020);border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.45);animation:pl 1.5s infinite;pointer-events:none;z-index:6}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(255,176,32,.75)}70%,100%{box-shadow:0 0 0 12px rgba(255,176,32,0)}}
+.cur.shake{animation:sk .38s}
+@keyframes sk{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.tab.cur{outline-offset:1px}
+.tab.cur::after{top:-4px;right:4px}
+@media (prefers-reduced-motion:reduce){.cur::after{animation:none}.cur.shake{animation:none}#scr.fade>*{animation:none}.gc{animation:none!important}}
+
+#sh{position:absolute;inset:0;display:none;align-items:flex-end;z-index:20}#sh.on{display:flex}
+.dim{position:absolute;inset:0;background:rgba(2,6,14,.5)}
+.gc{position:relative;width:100%;background:#f7f9fd;color:#14213a;border-radius:26px 26px 0 0;padding:20px 20px 22px;box-shadow:0 -12px 40px rgba(0,0,0,.35);animation:up .26s ease-out;font-family:"Noto Sans Myanmar","Padauk","Figtree",system-ui,sans-serif}
+@keyframes up{from{transform:translateY(46px);opacity:0}}
+.gc .bd{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}
+.gc small{display:inline-block;background:#fff0cc;color:#7a4f00;border-radius:99px;padding:3px 11px;font-weight:700;font-size:12px}
+.gc em{font-style:normal;font-size:12px;font-weight:700;color:#6b7a93;font-family:"Figtree",sans-serif}
+.gc h3{margin:6px 0 4px;font-size:18px;line-height:1.5}
+.gc p{margin:0 0 16px;font-size:14.5px;line-height:1.95;color:#33425a}
+.gc .btn{margin:0;font-family:inherit}
+.gc .btn.alt{background:#fff;color:#17803f;border:1.5px solid #17803f;margin-top:10px}
+#tt{position:absolute;left:16px;right:16px;top:64px;border-radius:12px;padding:12px 14px;font-size:14px;text-align:center;z-index:30;display:none;font-weight:700;font-family:"Noto Sans Myanmar","Figtree",sans-serif;line-height:1.7;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#tt.ok{background:#e4f8ec;color:#0d5a31}#tt.hint{background:#fff3d6;color:#6b4300}
+
+/* side panel */
+.side{width:268px;flex:none;color:var(--tx)}
+.side h1{font-size:15px;margin:0 0 4px;letter-spacing:.02em}.side .sm{color:var(--mu);font-size:13px;line-height:1.9}
+.side .pb{height:6px;border-radius:9px;background:var(--ln);margin:14px 0 6px;overflow:hidden}.side .pb i{display:block;height:100%;background:linear-gradient(90deg,#17803f,#35c47c);width:0;transition:width .35s}
+.side .cnt{font-size:13px;color:var(--mu);margin-bottom:14px;font-weight:600}
+.side ol{list-style:none;padding:0;margin:0}.side li{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;color:var(--mu);margin-bottom:4px;font-size:14.5px;font-family:"Noto Sans Myanmar","Figtree",sans-serif;line-height:1.6}
+.side li i{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--ln);display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;flex:none}
+.side li.on{background:#17803f;color:#fff;font-weight:700}.side li.on i{border-color:#fff}
+.side li.done{color:var(--tx)}.side li.done i{background:#17803f;border-color:#17803f;color:#fff}
+.side .rs{margin-top:14px;width:100%;border:1px solid var(--ln);background:transparent;border-radius:12px;padding:11px;font-size:14px;font-family:"Noto Sans Myanmar","Figtree",sans-serif;color:var(--tx)}
+.side .rs:hover{border-color:#17803f}
+.mini{display:none}
+@media (max-width:940px){.side{display:none}body{gap:0;padding-top:52px}.mini{display:block;position:fixed;top:0;left:0;right:0;z-index:50;padding:9px 16px;background:var(--pg2);font-size:12.5px;font-weight:700;color:var(--mu)}.mini .pb{height:4px;border-radius:9px;background:var(--ln);margin-top:6px;overflow:hidden}.mini .pb i{display:block;height:100%;background:#17803f;width:0;transition:width .35s}}
+@media (max-width:480px){
+ body{padding:0;flex-direction:column;align-items:stretch;justify-content:flex-start}
+ body{padding-top:0}.mini{position:static;flex:none}
+ .phone{width:100%;height:auto;flex:1;min-height:0;border:0;border-radius:0;box-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="mini" id="mini"><span id="mc"></span><div class="pb"><i id="mb"></i></div></div>
+<div class="phone" id="phone">
+  <div class="sb" id="sb"></div>
+  <div id="scr"></div>
+  <div id="bot"></div>
+  <div id="tt" role="status"></div>
+  <div id="sh" role="dialog" aria-modal="true" aria-labelledby="gt"><div class="dim"></div><div class="gc"><div class="bd"><small id="gs"></small><em id="gn2"></em></div><h3 id="gt"></h3><p id="gb"></p><button class="btn" id="gn"></button></div></div>
+</div>
+<aside class="side">
+  <h1 class="my">Payroll Management လမ်းညွန်အစီအစဉ်</h1>
+  <div class="pb"><i id="sbar"></i></div><div class="cnt" id="sc"></div>
+  <ol id="pl"></ol>
+  <p class="sm my" style="margin:14px 0 0">အဝါရောင်အစက်ပါသော နေရာကို နှိပ်ပါ။ အဆင့်တစ်ခု ပြီးမှသာ နောက်တစ်ခုသို့ သွားနိုင်ပါမည်။</p>
+  <button class="rs" id="rs">↺ အစကပြန်စမည်</button>
+</aside>
+
+<script>
+const $=s=>document.querySelector(s);
+const f2=n=>n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const cash=n=>"Cash "+f2(n);
+const mv=v=>!v?"0.00":v.toLocaleString("en-US");
+const r2=n=>Math.round(n*100)/100;
+
+/* ───────── icons ───────── */
+const IC={
+card:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/>',
+receipt:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',
+home:'<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+case:'<rect x="3" y="7" width="18" height="13" rx="3"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/>',
+user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
+shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+store:'<path d="M4 9l1.5-5h13L20 9"/><path d="M4 9a2.5 2.5 0 005 0 2.5 2.5 0 005 0 2.5 2.5 0 005 0"/><path d="M5 12v8h14v-8M10 20v-5h4v5"/>',
+users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 3-5.5 6.5-5.5S15.5 16.5 15.5 20"/><circle cx="17" cy="9" r="2.5"/><path d="M17.5 14.5c2.5 0 4 1.5 4 4"/>',
+arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+cash:'<rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/>',
+chR:'<path d="M9 6l6 6-6 6"/>',chL:'<path d="M15 6l-6 6 6 6"/>',chD:'<path d="M6 9l6 6 6-6"/>',
+cal:'<rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+play:'<circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/><path d="M10 8l6 4-6 4z" fill="#0a1120" stroke="none"/>',
+tri:'<path d="M7 5l12 7-12 7z" fill="currentColor"/>',
+uplus:'<circle cx="10" cy="8" r="3.5"/><path d="M3 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5M19 8v6M16 11h6"/>',
+pen:'<path d="M4 20l1-4L16 5l3 3L8 19z"/>',
+info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/>',
+ck:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+bell:'<path d="M6 17V11a6 6 0 0112 0v6l1.5 2h-15z"/><path d="M10 21h4"/>',
+dIn:'<circle cx="12" cy="12" r="10"/><path d="M12 7v9M8 12.5l4 4 4-4"/>',
+dOut:'<circle cx="12" cy="12" r="10"/><path d="M12 17V8M8 11.5l4-4 4 4"/>',
+dGo:'<circle cx="12" cy="12" r="10"/><path d="M7 12h10M13 8l4 4-4 4"/>',
+scan:'<path d="M4 9V6a2 2 0 012-2h3M15 4h3a2 2 0 012 2v3M20 15v3a2 2 0 01-2 2h-3M9 20H6a2 2 0 01-2-2v-3"/>',
+qr:'<rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 14h2.5v2.5H14zM18 18h2.5M18 14h2.5M14 19v1.5"/>',
+menu:'<path d="M5 7h14M5 12h14M5 17h14"/>',sq:'<rect x="6" y="6" width="12" height="12" rx="3"/>',bk:'<path d="M15 5l-7 7 7 7"/>'
+};
+const I=(n,s=20,x="")=>`<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${x}>${IC[n]}</svg>`;
+const BARS='<svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="4.3" y="5.5" width="3" height="6.5" rx=".8"/><rect x="8.6" y="3" width="3" height="9" rx=".8"/><rect x="12.9" y="0" width="3" height="12" rx=".8"/></svg>';
+const WIFI='<svg width="17" height="13" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M2 6.5a15 15 0 0120 0M5.5 10.5a10 10 0 0113 0M9 14.4a5 5 0 016 0"/><circle cx="12" cy="17" r="1" fill="currentColor"/></svg>';
+const MASC=(z=44)=>`<svg width="${z}" height="${z}" viewBox="0 0 48 48"><circle cx="24" cy="24" r="23" fill="#0f3a2a" stroke="#1f7a4d" stroke-width="2"/><path d="M24 9c-3 3-9 7-9 15 0 7 4 12 9 12s9-5 9-12c0-8-6-12-9-15z" fill="#8fe04b"/><path d="M24 9c3 2 5 5 6 8-2-1-4-1-6 0z" fill="#c8f56b"/><ellipse cx="20" cy="25" rx="2" ry="2.6" fill="#0b2a1c"/><ellipse cx="28" cy="25" rx="2" ry="2.6" fill="#0b2a1c"/><path d="M21 30q3 3 6 0" stroke="#0b2a1c" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="17" cy="29" r="1.8" fill="#ff9a8a" opacity=".7"/><circle cx="31" cy="29" r="1.8" fill="#ff9a8a" opacity=".7"/></svg>`;
+const TG='<span class="tg"><svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M3 11.5L21 4l-3 16-6-4.5-3 3v-5l9-7-11 6z"/></svg></span>';
+const sbar=(dev,t,b,x)=>`<span class="tm">${t}${x?TG:""}</span>${dev==="ios"?'<span class="isl"></span>':""}<span class="ri"><span class="sg"><sup>4G</sup>${BARS}</span><span class="sg"><sup>4G</sup>${BARS}</span>${WIFI}<span class="bat">${b}</span></span>`;
+
+/* ───────── guide script: one linear sequence, no skipping ───────── */
+const PARTS=["ဝင်ရောက်ခြင်း","Payroll Overview","ဝန်ထမ်းအသစ် ထည့်ခြင်း","အချက်အလက်နှင့် လစာပြင်ဆင်ခြင်း","Payday Schedule","Manual Payroll"];
+const MY=["၁","၂","၃","၄","၅","၆"];
+const SAMPLE={b:10000,fi:100,lv:100,ot:50,al:50,ov:9900};
+let S,i=0,done=false,sheetOpen=false,lastScr="";
+const fresh=()=>({emp:false,sal:{b:0,fi:0,lv:0,ot:0,al:0,ov:null},saved:false,sch:"28"});
+const ST=[
+{id:"login",p:0,n:"01",scr:"login",t:"App ကိုဖွင့်ပြီး Login ဝင်ပါ",b:"Mobile Banking / TMB App ကို ဖွင့်ပြီး Login ဝင်ပါ။"},
+{id:"biz",p:0,n:"02",scr:"home",t:"Business ကို ရွေးပါ",b:"Home စာမျက်နှာမှ Business ကို ရွေးပါ။"},
+{id:"pm",p:0,n:"03",scr:"biz",t:"Payroll Management",b:"Payroll Management ကတ်/မီနူးကို နှိပ်ပါ။"},
+{id:"bal",p:1,n:"1",scr:"pay",t:"Payroll Account Balance",b:"လစာပေးချေရန်အတွက် အသုံးပြုနိုင်မည့် လက်ကျန်ငွေပမာဏကို စစ်ဆေးနိုင်ပါသည်။"},
+{id:"ps",p:1,n:"2",scr:"pay",t:"Payday Schedule",b:"လစာပေးချေမည့်ရက်စွဲများကို ကြိုတင်သတ်မှတ်ထားနိုင်ပါသည်။<br>(သတ်မှတ်ပုံကို အပိုင်း ၅ တွင် ဆက်လက်ကြည့်ပါ။)"},
+{id:"mp",p:1,n:"3",scr:"pay",t:"Manual Payroll",b:"ဝန်ထမ်းများအား လစာပေးချေမှုများကို ကိုယ်တိုင်စီမံဆောင်ရွက်နိုင်ပါသည်။<br><b>* ဝန်ထမ်းအား Active အဖြစ်ထည့်ပြီး လစာမသတ်မှတ်ရသေးလျှင် ပေးချေ၍မရပါ။</b>"},
+{id:"em",p:1,n:"4",scr:"pay",t:"Employees",b:"ဝန်ထမ်းအချက်အလက်များကို ထည့်သွင်းခြင်းနှင့် စီမံခြင်းများ ပြုလုပ်နိုင်ပါသည်။<br><b>အစီအစဉ်:</b> ဝန်ထမ်းထည့် → လစာသတ်မှတ် → Payday Schedule → Manual Payroll"},
+{id:"ad",p:2,n:"01",scr:"pay",t:"+ Add ကို နှိပ်ပါ",b:"Payroll စာမျက်နှာရှိ Employees ဘေးမှ + Add ကို နှိပ်ပါ။"},
+{id:"a2",p:2,n:"02",scr:"add",t:"Email (Gmail)",b:"ဝန်ထမ်း၏ TMB Profile နှင့် ချိတ်ဆက်ထားသော (KYC) Gmail Email ကို ထည့်ပါ။"},
+{id:"a3",p:2,n:"03",scr:"add",t:"Name (Optional)",b:"Name (Optional) တွင် ဝန်ထမ်းအမည်ကို ထည့်ပါ။"},
+{id:"a4",p:2,n:"04",scr:"add",t:"User ID (Optional)",b:"User ID (Optional) တွင် Profile ထဲမှ User ID ကို ထည့်ပြီး အချက်အလက်မှန်ကန်ကြောင်း စစ်ပါ။"},
+{id:"a5",p:2,n:"05",scr:"add",t:"အပေါ်ဘက်ရှိ Add",b:"အပေါ်ဘက်ရှိ Add ကို နှိပ်ပါ။ ဝန်ထမ်းသည် Active အဖြစ် ထည့်သွင်းပြီး လစာသတ်မှတ်နိုင်ပါမည်။",act(){S.emp=true},ts:"Mai Naing ကို Active အဖြစ် ထည့်ပြီးပါပြီ ✓"},
+{id:"p1",p:3,n:"Step 01",scr:"pay",t:"ဝန်ထမ်းကို ရွေးချယ်ပါ",b:"Employees စာရင်းမှ သက်ဆိုင်ရာဝန်ထမ်းကို ရွေးချယ်ပါ။ (Edit / Set Salary)"},
+{id:"p2",p:3,n:"Step 02",scr:"edit",time:"12:08",t:"Status Management",b:"Status ကို Active သို့မဟုတ် Suspended အဖြစ် သတ်မှတ်ပါ။ Suspended ဖြစ်ပါက Payroll တွင် လစာမပါဝင်စေရန် အသုံးပြုနိုင်ပါသည်။"},
+{id:"p3",p:3,n:"Step 03",scr:"edit",time:"12:08",t:"Information Details",b:"အောက်ပါအချက်အလက်များကို ဖြည့်စွက်နိုင်ပါသည်။<br>Position / Job Title · Gender · Join Date · Phone Number · Address · Date of Birth · National ID"},
+{id:"c1",p:3,n:"လစာ 01",scr:"edit",t:"Basic Salary",b:"Basic Salary – လစဉ်/သတ်မှတ်ကာလအလိုက် အခြေခံလစာ။<br>Basic Salary ကို ထည့်သွင်းပါ။ <b>(ဆက်သွားမည်ကို နှိပ်လျှင် နမူနာတန်ဖိုး 10,000 ထည့်ပေးပါမည်။)</b>",act(){S.sal.b=SAMPLE.b}},
+{id:"c2",p:3,n:"လစာ 02",scr:"edit",t:"Fines နှင့် Leave",b:"Fines – လစာမှ နုတ်ယူမည့် ပမာဏ။<br>Leave – ခွင့်ရက် / မူဝါဒအရ နုတ်ယူမည့် ပမာဏ။<br>နုတ်ယူမည့်ငွေဖြစ်သောကြောင့် အနုတ်သဘောဖြင့် စဉ်းစားပါ။",act(){S.sal.fi=SAMPLE.fi;S.sal.lv=SAMPLE.lv}},
+{id:"c3",p:3,n:"လစာ 03",scr:"edit",t:"OT နှင့် Allowance",b:"OT – အချိန်ပိုကြေး / Attendance အတည်ပြုထားသည့် OT အလိုက်။<br>Allowance – သတ်မှတ်ထားသော ထောက်ပံ့ကြေး။<br>ထပ်ပေါင်းမည့်ငွေဖြစ်သောကြောင့် HR အတည်ပြုချက်အတိုင်း ထည့်ပါ။",act(){S.sal.ot=SAMPLE.ot;S.sal.al=SAMPLE.al}},
+{id:"c4",p:3,n:"လစာ 04",scr:"edit",t:"Net Pay per Cycle",b:"Net Pay per Cycle တွင် စနစ်က တွက်ပြသော အသားတင်လစာကို ပြန်စစ်ပါ။<br><b>10,000 − 100 − 100 + 50 + 50 = 9,900.00</b>"},
+{id:"c5",p:3,n:"လစာ 05",scr:"edit",t:"Final Payroll Override",b:"Final Payroll Override တွင် တိုက်ရိုက်ပေးချေမည့်ပမာဏ ထည့်နိုင်သော်လည်း အတည်ပြုချက်ရှိမှသာ အသုံးပြုပါ။<br><b>* Override ကို အသုံးမပြုမီ စာရင်းဇယားများကို သေချာစွာ စစ်ဆေးရန် လိုအပ်ပါသည်။</b>",act(){S.sal.ov=SAMPLE.ov}},
+{id:"c6",p:3,n:"လစာ 06",scr:"edit",t:"Save",b:"အချက်အလက်အားလုံး မှန်ကန်ပါက Save ကို နှိပ်ပါ။",act(){S.saved=true},ts:"သိမ်းဆည်းပြီးပါပြီ ✓"},
+{id:"s0",p:4,n:"01",scr:"pay",t:"Payday Schedule သို့ ဝင်ပါ",b:"Payroll စာမျက်နှာသို့ဝင်ပါ။ Payday Schedule အားနှိပ်ပါ။"},
+{id:"fr",p:4,n:"02",scr:"sched",t:"Frequency Selection",b:"Monthly, Bi-weekly သို့မဟုတ် Weekly ကို ရွေးချယ်ပါ။"},
+{id:"tm",p:4,n:"03",scr:"sched",t:"Payday Timing",b:"Monthly ဖြစ်ပါက End of the month, Before end of month သို့မဟုတ် After end of month ကို ရွေးချယ်ပါ။"},
+{id:"sub",p:4,n:"04",scr:"sched",t:"Submit",b:"နောက်လာမည့် Payday ရက်စွဲကို ပြန်စစ်ပြီး Submit ကို နှိပ်ပါ။",act(){S.sch="eom"},ts:"Payday Schedule သတ်မှတ်ပြီးပါပြီ ✓"},
+{id:"m0",p:5,n:"01",scr:"pay",t:"Manual Payroll ကို နှိပ်ပါ",b:"Payroll စာမျက်နှာသို့ဝင်ပါ။ Manual Payroll ကို နှိပ်ပါ။"},
+{id:"m1",p:5,n:"02",scr:"manual",t:"Dept Balance နှင့် Total Debit",b:"System ပြသသော Dept Balance နှင့် Total Debit ကို စစ်ပါ။"},
+{id:"m2",p:5,n:"03",scr:"manual",t:"လစာပေးမည့်ဝန်ထမ်း",b:"လစာပေးမည့် ဝန်ထမ်းများကို Tick လုပ်ပါ။ မပေးမည့်ဝန်ထမ်းသည် Suspended / Skipped စာရင်းတွင် ရှိကြောင်း စစ်ပါ။"},
+{id:"m3",p:5,n:"04",scr:"manual",t:"ငွေပမာဏများ စစ်ပါ",b:"ဝန်ထမ်းတစ်ဦးချင်းစီ၏ Amount This Run၊ Default Cash နှင့် PMS Fee ကို စစ်ပါ။"},
+{id:"m4",p:5,n:"05",scr:"manual",t:"Pay ကို နှိပ်ပါ",b:"အောက်ခြေရှိ Pay [အရေအတွက်] ကို နှိပ်ပါ။"},
+{id:"m5",p:5,n:"06",scr:"manual",auto:1,last:1,t:"နောက်ဆုံးအကြိမ် စစ်ပါ",b:"အတည်ပြုစာမျက်နှာရှိ စုစုပေါင်းငွေပမာဏ၊ ဝန်ထမ်းအရေအတွက်နှင့် အကောင့်လက်ကျန်ကို နောက်ဆုံးအကြိမ်စစ်ပြီးမှ ဆက်လုပ်ပါ။<br><b>* အတည်ပြုချက်များအားလုံးကို သေချာစွာစစ်ဆေးပါ။</b>"}
+];
+const A=(...ids)=>ids.includes(ST[i].id)?`data-s="${ST[i].id}"`:"";
+
+/* ───────── screens (copied from the supplied app screenshots) ───────── */
+const tabs=(on,and)=>`<div class="tabbar ${and?"and":""}"><div class="tab">${I("card",26)}<span>Accounts</span></div><div class="tab">${I("receipt",26)}<span>Transacti…</span></div><div class="tab home ${on==="home"?"hot":""}"><span class="hc">${I("home",28)}</span><span>Home</span></div><div class="tab ${on==="biz"?"on":""}" ${on==="biz"?"":A("biz")}>${I("case",26)}<span>Business</span></div><div class="tab">${I("user",26)}<span>Profile</span></div></div>`;
+const ANAV=`<div class="andnav"><span>${I("menu",22)}</span><span>${I("sq",22)}</span><span>${I("bk",22)}</span></div>`;
+const money=(v,id)=>`<div class="fld money"><span class="cur-t">Cash</span><span class="v">${v}</span></div>`;
+const SC={
+login:()=>({dev:"ios",time:"1:49",bat:71,bot:'<div class="hind"><i></i></div>',html:`<div class="lg"><div class="logo">TMB</div><h1>The Mountain Bank</h1><p class="sub">Sign in to your account</p><div class="seg"><span class="on">Sign in</span><span>Create account</span></div><div class="card"><div class="lbl">Email</div><div class="fld">employee@example.com</div><button class="btn" ${A("login")}>Continue</button></div></div>`}),
+home:()=>({dev:"and",time:"3:37",bat:95,tg:1,bot:tabs("home",1)+ANAV,html:`<div class="pad" style="padding-top:14px"><div class="hh">${MASC(52)}<div class="t"><div class="g">Good day</div><h1>Mountain Bank</h1></div><span class="bellb">${I("bell",24)}<i>9+</i></span></div>
+<div class="tb2"><div class="wm">${MASC(60)}</div><div class="lb2"><span>Total Balance</span>${I("eye",22)}</div><div class="bigv">TMC 7,236,949.90</div>
+<div class="acts"><div><span class="ti">${I("dIn",24)}</span>Deposit</div><div><span class="ti">${I("dOut",24)}</span>Withdraw</div><div><span class="ti">${I("dGo",24)}</span>Transfer</div></div><hr>
+<div class="acts"><div><span class="ti">${I("scan",24)}</span>Scan &amp; Pay</div><div><span class="ti">${I("receipt",24)}</span>Pay Bills</div><div><span class="ti">${I("qr",24)}</span>My QR</div></div></div>
+<div class="tip">${MASC(46)}<div><b>Mg Tain:</b> Your balance is looking healthy — consider moving surplus funds into a fixed deposit.</div></div></div>`}),
+biz:()=>({dev:"ios",time:"11:40",bat:67,bot:tabs("biz")+'<div class="hind"><i></i></div>',cls:"biz",html:`<div class="pad"><div class="bh"><div><h1>Business</h1><div class="sub">Merchant &amp; payroll accounts</div></div><div class="sel2">${I("case",20)}<span>Nfbrother</span>${I("chD",18)}</div></div><div class="act">${I("shield",20)}Business Banking Active</div>
+<div class="bg2"><div class="bc"><span class="ar" style="color:#27d083">${I("arrow",18)}</span><div class="bi" style="background:#0f3d33;color:#27d083">${I("store",30)}</div><b>Merchant Portal</b><div class="vm">View merchant</div></div>
+<div class="bc" ${A("pm")} style="cursor:pointer"><span class="ar" style="color:#3b8cff">${I("arrow",18)}</span><div class="bi" style="background:#18356b;color:#4d9bff">${I("users",30)}</div><b>Payroll Management</b><div class="tmc">TMC<br>14,870.00</div></div></div>
+<div class="bl"><div class="bi" style="background:#232f3d;color:#f2b430">${I("cash",30)}</div><div class="mid"><b>Loan Approvals</b><div class="s">Review employee salary advance requests</div></div>${I("chR",20)}</div>
+<div class="bl"><div class="bi" style="background:#0f3d33;color:#27d083">${I("store",30)}</div><div class="mid"><b>Nfbrothe…</b><div class="s">Merchant Account</div></div><div class="rg">TMC 6,000.00<i></i></div>${I("chR",20)}</div>
+<div class="bl"><div class="bi" style="background:#18356b;color:#4d9bff">${I("case",30)}</div><div class="mid"><b>Nfbroth…</b><div class="s">Open payroll</div></div><div class="rg">TMC 14,870.00<i></i></div>${I("chR",20)}</div></div>`}),
+pay:()=>{const sv=S.saved,a=S.emp?1:0,tot=S.emp?2:1,eom=S.sch==="eom";
+ const mai=S.emp?`<div class="ecard"><div class="erow"><div class="av">M</div><div class="emid"><div class="nm"><b>Mai Naing</b><span class="tag">Active</span></div><div class="em">employee@example.com</div></div><div class="eam"><b>${cash(sv?9900:0)}</b><small>Basic Salary ${cash(sv?10000:0)}</small><small>Net Pay</small></div></div><div class="edit" ${A("p1")}>${I("pen",17)}<span>Edit / Set Salary</span></div></div>`:"";
+ return{dev:"and",time:sv?"12:47":"11:41",bat:sv?71:67,bot:"and",html:`<div class="phead"><span class="bk">${I("chL",24)}</span><div><h2>Payroll</h2><div class="sub">Nfbrother</div></div><span class="pbtn">${I("uplus",20)}</span></div><div class="pad" style="padding-top:12px">
+<div class="card bal" ${A("bal")}><div class="l"><div class="cap">Payroll account balance</div><div class="amt">Cash<br>14,870.00</div><div class="sub" style="color:#cdd7e8">Nfbrother</div></div><div class="rt"><span class="chip">${I("users",14)}${a} active · ${tot} total</span>${sv?'<div class="pr">Cash 9,900.00 payroll</div>':""}</div></div>
+<div class="card row" ${A("ps","s0")}><span class="ico">${I("cal",22)}</span><div class="mid"><div class="cap" style="font-size:11.5px">Payday schedule</div><div class="big2">${eom?"End of the month":"28th of every month"}</div><div class="sub">${eom?"Next: Oct 31, 2026 · 25 days away":"Next: Oct 28, 2026 · 22 days away"}</div></div>${I("chR",20)}</div>
+<div class="card row" ${A("mp","m0")}><span class="ico2">${I("play",28)}</span><div class="mid"><div class="big2" style="margin:0">Manual Payroll</div><div class="sub" style="color:#d3dcec">${sv?"1 employee · Cash 9,900.00 · Manual or auto on payday":"Set salary for active employees first"}</div></div>${I("chR",20)}</div>
+<div class="eh"><b ${A("em")} style="position:relative">Employees (${tot})</b><span class="add" ${A("ad")}>+ Add</span></div>
+<div class="ecard"><div class="erow"><div class="av x">H</div><div class="emid"><div class="nm"><b>HIII</b><span class="tag x">Suspended</span></div><div class="em">nn2@g…</div></div><div class="eam"><b>Cash 18,000.00</b><small>Basic Salary Cash 20,000.00</small><small>Net Pay</small></div></div><div class="edit">${I("pen",17)}<span>Edit / Set Salary</span></div></div>${mai}</div>`}},
+add:()=>({dev:"and",time:"12:08",bat:71,bot:"and",html:`<div class="top"><span class="tl">Cancel</span><span>Add Employee</span><span class="tr ${ST[i].id==="a5"?"on":""}" ${A("a5")}>Add</span></div><div class="pad" style="padding-top:8px">
+<div ${A("a2")}><div class="lbl" style="margin-top:12px">Email (Gmail)</div><p class="hint">Enter the email on their TMB Profile. They need an active Current Account to receive salary.</p><div class="fld">employee@example.com</div></div>
+<div ${A("a3")}><div class="lbl" style="margin-top:22px">Name (optional)</div><p class="hint">Defaults to their TMB profile name if left blank.</p><div class="fld">Mai Naing</div></div>
+<div ${A("a4")}><div class="lbl" style="margin-top:22px">User ID (optional)</div><p class="hint">Optional cross-check — 10-digit TMB User ID from their Profile.</p><div class="fld">00 11122239</div></div>
+<p class="hint" style="margin-top:20px">The employee is added as Active and can receive payroll once salary is set.</p></div>`}),
+edit:()=>{const s=S.sal,comp=s.b-s.fi-s.lv+s.ot+s.al,ovd=s.ov!==null,dirty=!!(s.b||s.fi||s.lv||s.ot||s.al||ovd),any=s.fi||s.lv||s.ot||s.al;
+ const brk=any?`<div class="l">Net pay per cycle${s.fi?`<div class="r">− Fines Cash ${f2(s.fi)}</div>`:""}${s.lv?`<div class="r">− Leave Cash ${f2(s.lv)}</div>`:""}${s.ot?`<div class="g">+ OT Cash ${f2(s.ot)}</div>`:""}${s.al?`<div class="g">+ Allowance Cash ${f2(s.al)}</div>`:""}</div>`:`<div class="l">Net pay per cycle</div>`;
+ const fld=(l,v,c)=>`<div><div class="lbl s ${c||""}">${l}</div>${money(mv(v))}</div>`;
+ return{dev:"and",time:ST[i].time||"12:11",bat:71,bot:"and",html:`<div class="top"><span class="tl">Cancel</span><span>Edit Employee</span><span class="tr ${dirty?"on":""}" ${A("c6")}>Save</span></div><div class="pad" style="padding-top:12px">
+<div class="card" style="display:flex;align-items:center;gap:12px;padding:14px"><div class="av g">MN</div><div style="flex:1;min-width:0"><b style="font-size:18px;font-weight:600">Mai Naing</b><div style="font-size:14.5px;color:#d3dcec;word-break:break-all;line-height:1.3">employee@example.com</div></div><span class="tag" style="background:#15233a;color:#4b6a82;border:1px solid #243756;font-size:12px;padding:4px 10px">Active</span></div>
+<div ${A("p2")}><div class="lbl">Status</div><div class="fld sel"><span>Active</span>${I("chD",20)}</div><p class="hint" style="margin-top:10px">Choose Suspended to pause payroll for this employee, then save.</p></div>
+<div class="sec" ${A("p3")} style="position:relative;margin-top:22px">Personal information</div>
+<div class="lbl s">Position / Job title</div><div class="fld ph">e.g. Senior Accountant</div>
+<div class="two"><div><div class="lbl s">Gender</div><div class="fld sel"><span class="ell">— Not specified</span>${I("chD",18)}</div></div><div><div class="lbl s">Join date</div><div class="fld">2024-01-15</div></div></div>
+<div class="lbl s">Phone</div><div class="fld ph" style="color:#d3dcec">+95 9 xxx xxx</div>
+<div class="lbl s">Address</div><div class="fld ph" style="color:#d3dcec">Street, City, Township</div>
+<div class="lbl s">Date of birth</div><div class="fld">1990-01-15</div>
+<div class="lbl s">National ID</div><div class="fld">9/MaKaNa(N)123456</div>
+<div class="sec" style="margin-top:26px">Salary components</div>
+<div ${A("c1")}>${fld("Basic salary",s.b)}</div>
+<div class="two" ${A("c2")}>${fld("− Fines",s.fi,"red")}${fld("− Leave",s.lv,"red")}</div>
+<div class="two" ${A("c3")}>${fld("+ OT",s.ot,"grn")}${fld("+ Allowance",s.al,"grn")}</div>
+<div class="net" ${A("c4")}>${brk}<b>${cash(ovd?comp:comp)}</b></div>
+<div ${A("c5")}><div class="sec" style="margin-top:22px">Final payroll override</div><p class="hint" style="margin:8px 0 12px">Leave blank to use computed net pay. When set, this amount is paid directly.</p><div class="ov">Override amount (computed: ${cash(comp)})</div>${money(mv(s.ov))}</div><div style="height:12px"></div></div>`}},
+sched:()=>({dev:"and",time:"12:12",bat:71,bot:"and",html:`<div class="top"><span class="tl g">Cancel</span><span>Payday Schedule</span><span class="tr on" ${A("sub")}>Submit</span></div><div class="pad" style="padding-top:6px">
+<div ${A("fr")}><div class="lbl" style="margin-top:14px">Frequency</div><div class="chips"><span class="on">Monthly</span><span>Bi-weekly</span><span>Weekly</span></div></div>
+<div ${A("tm")}><div class="lbl" style="margin-top:22px">Monthly payday</div><div class="opt on">End of the month</div><div class="opt">Before end of month</div><div class="opt">After end of month</div></div>
+<p class="hint" style="margin-top:-2px">Saving replaces the fixed day-of-month.</p>
+<div class="prev">${I("cal",18)}<div><b>End of the month</b><small>Next payday: Oct 31, 2026</small></div></div></div>`}),
+manual:()=>({dev:"and",time:"12:12",bat:71,bot:"and",html:`<div class="top"><span class="tl">Cancel</span><span>Manual Payroll</span><span></span></div><div class="pad" style="padding-top:14px">
+<div class="sc2" ${A("m1")}><div class="c"><div class="cap">Dept balance</div><b>Cash 14,870.00</b></div><div class="c"><div class="cap">Total debit</div><b>Cash 9,924.75</b></div></div>
+<div class="pms">${I("info",16)}<div><b>PMS fee 0.25%</b><span>Employer: Cash 24.75. Each employee also pays 0.25% of their gross.</span></div></div>
+<div class="selrow"><span>1 of 1 selected</span><span><span class="a">Select all</span>Clear</span></div>
+<p class="hint">Tick employees to include. The amount is the saved pay. Change it in employee edit.</p>
+<div class="ecard2" ${A("m2")}><div class="er"><span class="cb">${I("ck",16,'stroke-width="3"')}</span><span class="av">MN</span><div><b>Mai Naing</b><small>Default Cash 9,900.00</small></div></div><div ${A("m3")} style="position:relative"><span class="cap">Amount this run</span><div class="am">Cash 9,900.00</div><div class="fee">PMS fee Cash 24.75 · net Cash 9,875.25</div></div></div>
+<b style="font-size:17px;font-weight:600">1 Skipped</b><div class="skip"><span>HIII</span><span>Suspended</span></div>
+<div class="pay" ${A("m4")}>${I("tri",16)}<span>Pay 1 · Cash 9,924.75</span></div></div>`})
+};
+
+/* ───────── render ───────── */
+function render(){
+  const st=ST[i],sc=SC[st.scr](),scr=$("#scr"),ph=$("#phone"),same=lastScr===st.scr,y=scr.scrollTop;
+  ph.className="phone "+sc.dev+(sc.cls?" "+sc.cls:"");
+  $("#sb").innerHTML=sbar(sc.dev,sc.time,sc.bat,sc.tg);
+  scr.classList.toggle("fade",!same);scr.innerHTML=sc.html;
+  $("#bot").innerHTML=sc.bot==="and"?ANAV:sc.bot||"";
+  scr.scrollTop=same?y:0;lastScr=st.scr;
+  const t=document.querySelector(`[data-s="${st.id}"]`);
+  if(t){t.classList.add("cur");t.setAttribute("tabindex","0");t.setAttribute("role","button");t.setAttribute("aria-label",st.t)}
+  if(t&&scr.contains(t)){const top=t.getBoundingClientRect().top-scr.getBoundingClientRect().top+scr.scrollTop,tall=t.offsetHeight>scr.clientHeight*.5;
+    const goal=Math.max(0,top-(tall?78:Math.round(scr.clientHeight*.22)));
+    const rt=t.getBoundingClientRect().top-scr.getBoundingClientRect().top,vis=rt>=40&&rt+t.offsetHeight<=scr.clientHeight-300;
+    if(!vis&&Math.abs(goal-scr.scrollTop)>6)scr.scrollTo({top:goal,behavior:matchMedia("(prefers-reduced-motion:reduce)").matches?"auto":"smooth"})}
+  side();
+}
+function side(){
+  const n=ST.length,k=done?n:i;
+  $("#sc").textContent=done?`အားလုံး ပြီးဆုံးပါပြီ (${n}/${n})`:`အဆင့် ${i+1} / ${n}`;
+  const w=(k/n*100).toFixed(1)+"%";$("#sbar").style.width=w;$("#mb").style.width=w;$("#mc").textContent=done?"လမ်းညွှန်ချက် ပြီးဆုံးပါပြီ ✓":`အဆင့် ${i+1} / ${n} · ${PARTS[ST[i].p]}`;
+  $("#pl").innerHTML=PARTS.map((p,x)=>{const dn=done||ST[i].p>x;const on=!done&&ST[i].p===x;return`<li class="${dn?"done":""} ${on?"on":""}"><i>${dn?"✓":x+1}</i>${p}</li>`}).join("");
+}
+function toast(t,k="ok"){const x=$("#tt");x.textContent=t;x.className=k;x.style.display="block";clearTimeout(toast.h);toast.h=setTimeout(()=>x.style.display="none",k==="ok"?2400:2200)}
+
+/* sheet */
+function openSheet(){
+  const d=ST[i];sheetOpen=true;
+  $("#gs").textContent=`${MY[d.p]} ${PARTS[d.p]} · ${d.n}`;$("#gn2").textContent=`${i+1}/${ST.length}`;
+  $("#gt").textContent=d.t;$("#gb").innerHTML=d.b;$("#gn").textContent=d.last?"ပြီးဆုံးပါပြီ ✓":"ဆက်သွားမည်";
+  $("#sh").classList.add("on");$("#gn").focus({preventScroll:true});
+  const t=document.querySelector(".cur"),scr=$("#scr");
+  requestAnimationFrame(()=>{const g=$(".gc");scr.style.paddingBottom=(g.offsetHeight+16)+"px";
+    if(t&&scr.contains(t)){const H=$("#sh"),sh=H.getBoundingClientRect().top+H.clientHeight-g.offsetHeight,tb=t.getBoundingClientRect().bottom;if(tb>sh-16)scr.scrollBy({top:tb-sh+28,behavior:"smooth"})}})
+}
+function next(){
+  const d=ST[i];
+  if(d.last){finish();return}
+  $("#sh").classList.remove("on");sheetOpen=false;$("#scr").style.paddingBottom="";
+  if(d.act)d.act();if(d.ts)toast(d.ts);
+  i++;render();
+  if(ST[i].auto)setTimeout(openSheet,350);
+}
+function finish(){
+  done=true;side();
+  $("#gs").textContent="✓ ပြီးဆုံး";$("#gn2").textContent=`${ST.length}/${ST.length}`;
+  $("#gt").textContent="လမ်းညွှန်ချက် အားလုံး ပြီးဆုံးပါပြီ";
+  $("#gb").innerHTML="Payroll Management ၏ ဝင်ရောက်ခြင်း၊ ဝန်ထမ်းထည့်ခြင်း၊ လစာသတ်မှတ်ခြင်း၊ Payday Schedule နှင့် Manual Payroll အဆင့်အားလုံးကို လေ့လာပြီးပါပြီ။";
+  $("#gn").textContent="အစကပြန်စမည်";$("#gn").onclick=reset;
+}
+function nudge(){
+  const c=document.querySelector(".cur");
+  if(c){c.classList.remove("shake");void c.offsetWidth;c.classList.add("shake")}
+  toast("အဝါရောင်အစက်ပါသော နေရာကို အရင်နှိပ်ပါ။","hint");
+}
+function reset(){S=fresh();i=0;done=false;sheetOpen=false;lastScr="";$("#sh").classList.remove("on");$("#scr").style.paddingBottom="";$("#tt").style.display="none";$("#gn").onclick=next;render()}
+
+/* input: only the current yellow-dot target works; everything else is locked */
+$("#phone").addEventListener("click",e=>{
+  if(sheetOpen||done)return;
+  if(!e.target.closest("#scr,#bot"))return;
+  const t=e.target.closest("[data-s]");
+  if(t&&t.dataset.s===ST[i].id)openSheet();else nudge();
+});
+$("#phone").addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&!sheetOpen&&e.target.classList&&e.target.classList.contains("cur")){e.preventDefault();openSheet()}});
+$("#gn").onclick=next;
+$("#rs").onclick=reset;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&sheetOpen)e.preventDefault()});
+reset();
+</script>
+</body>
+</html>
